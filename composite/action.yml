@@ -20,6 +20,6 @@ runs:
       with:
         message: |
           # :wave: Docker images are pushed successfully
-          ${{ steps.test-action.outputs.markdown-string }}
+          ${{ steps.docker-tags-to-markdown.outputs.markdown-string }}
         reactions: eyes, rocket
         comment_tag: docker
