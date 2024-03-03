@@ -6,5 +6,5 @@
 
 export function formatDockerTags(dockerTags: string): string {
   const tags = dockerTags.split('\n')
-  return tags.map(tag => `- \`${tag}\``).join('\n')
+  return tags.map(tag => '- `${tag}').join('\n')
 }
