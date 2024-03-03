@@ -1,5 +1,5 @@
-name: "Docker tags as a PR comment"
-description: "Add the docker tags as a comment to the PR."
+name: "Docker tags to a markdown bullet list"
+description: "Convert the docker tags to a markdown bullet list"
 author: "Jizu Sun"
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.

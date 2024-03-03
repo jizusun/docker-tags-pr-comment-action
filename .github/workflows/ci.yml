@@ -56,22 +56,9 @@ jobs:
 
       - name: Test Local Action
         id: test-action
-        uses: ./
+        uses: ./composite
         with:
           docker-tags: |
             image:foo
             image:bar
-
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.markdown-string }}"
-
-      - name: PR comment with reactions
-        uses: thollander/actions-comment-pull-request@v2
-        if: github.event_name == 'pull_request'
-        with:
-          message: |
-            # :wave: Docker images are pushed successfully
-            ${{ steps.test-action.outputs.markdown-string }}
-          reactions: eyes, rocket
-          comment_tag: docker
+            image:foobar
