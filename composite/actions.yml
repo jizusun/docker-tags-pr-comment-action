@@ -1,0 +1,25 @@
+name: "Docker tags as a PR comment"
+description: "Add the docker tags as a comment to the PR."
+author: "Jizu Sun"
+inputs:
+  docker-tags:
+    description: "the string of docker tags"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Docker Tags to a Markdown Bullet List
+      id: docker-tags-to-markdown
+      uses: ../
+      with:
+        docker-tags: ${{ inputs.docker-tags }}
+
+    - name: PR comment with reactions
+      uses: thollander/actions-comment-pull-request@v2
+      with:
+        message: |
+          # :wave: Docker images are pushed successfully
+          ${{ steps.test-action.outputs.markdown-string }}
+        reactions: eyes, rocket
+        comment_tag: docker
