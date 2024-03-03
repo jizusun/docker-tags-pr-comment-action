@@ -68,6 +68,7 @@ jobs:
 
       - name: PR comment with reactions
         uses: thollander/actions-comment-pull-request@v2
+        if: github.event_name == 'pull_request'
         with:
           message: |
             # :wave: Docker images are pushed successfully
