@@ -11,7 +11,7 @@ runs:
   steps:
     - name: Docker Tags to a Markdown Bullet List
       id: docker-tags-to-markdown
-      uses: jizusun/docker-tags-pr-comment-action
+      uses: jizusun/docker-tags-pr-comment-action@main
       with:
         docker-tags: ${{ inputs.docker-tags }}
 
