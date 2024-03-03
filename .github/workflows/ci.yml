@@ -58,7 +58,9 @@ jobs:
         id: test-action
         uses: ./
         with:
-          docker-tags: 'image:foo\nimage:bar'
+          docker-tags: |
+            image:foo
+            image:bar
 
       - name: Print Output
         id: output
