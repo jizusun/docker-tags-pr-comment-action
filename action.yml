@@ -1,23 +1,22 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: "Docker tags as a PR comment"
+description: "Add the docker tags as a comment to the PR."
+author: "Jizu Sun"
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
-  icon: 'heart'
-  color: 'red'
+  icon: "heart"
+  color: "red"
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  docker-tags:
+    description: "the string of docker tags"
     required: true
-    default: '1000'
 
 # Define your outputs here.
 outputs:
-  time:
-    description: 'Your output description here'
+  markdown-string:
+    description: "the string of a markdown bullet list "
 
 runs:
   using: node20
