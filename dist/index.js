@@ -2735,8 +2735,10 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.formatDockerTags = void 0;
 function formatDockerTags(dockerTags) {
-    const tags = dockerTags.split('\n');
-    return tags.map(tag => `- \`${tag}\``).join('\n');
+    return dockerTags
+        .split('\n')
+        .map(tag => `- \`${tag}\``)
+        .join('\n');
 }
 exports.formatDockerTags = formatDockerTags;
 
