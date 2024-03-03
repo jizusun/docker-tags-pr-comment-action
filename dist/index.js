@@ -2722,6 +2722,27 @@ exports["default"] = _default;
 
 /***/ }),
 
+/***/ 109:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+/**
+ * Converts docker tags string into a markdown bullet list string.
+ * @param dockerTags The docker tags string.
+ * @returns string The markdown bullet list string.
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.formatDockerTags = void 0;
+function formatDockerTags(dockerTags) {
+    const tags = dockerTags.split('\n');
+    return tags.map(tag => `- \`${tag}\``).join('\n');
+}
+exports.formatDockerTags = formatDockerTags;
+
+
+/***/ }),
+
 /***/ 399:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -2753,22 +2774,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core = __importStar(__nccwpck_require__(186));
-const wait_1 = __nccwpck_require__(259);
+const formatter_1 = __nccwpck_require__(109);
 /**
  * The main function for the action.
- * @returns {Promise<void>} Resolves when the action is complete.
+ * @returns void
  */
-async function run() {
+function run() {
     try {
-        const ms = core.getInput('milliseconds');
+        const dockerTags = core.getInput('docker-tags');
         // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-        core.debug(`Waiting ${ms} milliseconds ...`);
-        // Log the current timestamp, wait, then log the new timestamp
-        core.debug(new Date().toTimeString());
-        await (0, wait_1.wait)(parseInt(ms, 10));
-        core.debug(new Date().toTimeString());
+        core.debug(`docker-tags: ${dockerTags} `);
+        const markdownString = (0, formatter_1.formatDockerTags)(dockerTags);
         // Set outputs for other workflow steps to use
-        core.setOutput('time', new Date().toTimeString());
+        core.setOutput('markdown-string', markdownString);
     }
     catch (error) {
         // Fail the workflow run if an error occurs
@@ -2777,31 +2795,6 @@ async function run() {
     }
 }
 exports.run = run;
-
-
-/***/ }),
-
-/***/ 259:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.wait = void 0;
-/**
- * Wait for a number of milliseconds.
- * @param milliseconds The number of milliseconds to wait.
- * @returns {Promise<string>} Resolves with 'done!' after the wait is over.
- */
-async function wait(milliseconds) {
-    return new Promise(resolve => {
-        if (isNaN(milliseconds)) {
-            throw new Error('milliseconds not a number');
-        }
-        setTimeout(() => resolve('done!'), milliseconds);
-    });
-}
-exports.wait = wait;
 
 
 /***/ }),
