@@ -19,7 +19,7 @@ runs:
       uses: thollander/actions-comment-pull-request@v2
       with:
         message: |
-          # :wave: Docker images are pushed successfully
+          # :rocket: Docker images are successfully built and pushed
           ${{ steps.docker-tags-to-markdown.outputs.markdown-string }}
         reactions: eyes, rocket
         comment_tag: docker
