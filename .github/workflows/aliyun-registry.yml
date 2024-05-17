@@ -9,24 +9,26 @@ env:
   REGISTRY_URL: "hsc-registry.cn-shanghai.cr.aliyuncs.com/chinagpt"
 
 jobs:
-  docker-login:
+  docker-login-registry:
     name: Docker login Aliyun
     runs-on: ubuntu-latest
     steps:
-
       - name: Login to registry.cn-shanghai.aliyuncs.com
         uses: docker/login-action@v3.0.0
         with:
           registry: registry.cn-shanghai.aliyuncs.com
           username: foo
           password: bar
+  docker-login-hsc-registry:
+    name: Docker login Aliyun
+    runs-on: ubuntu-latest
+    steps:
       - name: Login to ${{ env.REGISTRY_URL}}
         uses: docker/login-action@v3.0.0
         with:
           registry: ${{ env.REGISTRY_URL}}
           username: foo
           password: bar
-
   curl:
     name: Check Aliyun
     runs-on: ubuntu-latest
