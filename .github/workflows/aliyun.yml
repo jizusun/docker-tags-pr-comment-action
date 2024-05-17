@@ -19,6 +19,8 @@ jobs:
         uses: docker/login-action@v3.0.0
         with:
           registry: ${{ env.REGISTRY_URL}}
+          username: foo
+          password: bar
 
       - name: Checkout repository
         uses: actions/checkout@v2
