@@ -1,4 +1,4 @@
-name: Check Aliyun
+name: Check AliCloud
 
 on:
   pull_request:
@@ -27,14 +27,18 @@ jobs:
   curl:
     name: Check Aliyun
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        registry_url: 
+          - hsc-registry.cn-shanghai.cr.aliyuncs.com
+          - registry.cn-shanghai.aliyuncs.com
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
 
-      - name: Curl the AliCloud container registry - shanghai
+      - name: Curl ${{ matrix.registry_url }} 
         shell: bash
         run: |
-          url="https://hsc-registry.cn-shanghai.cr.aliyuncs.com/v2/"
-          "${GITHUB_WORKSPACE}/.github/scripts/get-server-geolocation.sh" $url
+          "${GITHUB_WORKSPACE}/.github/scripts/get-server-geolocation.sh" ${{ matrix.registry_url }}
