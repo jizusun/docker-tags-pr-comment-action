@@ -32,8 +32,8 @@ jobs:
       fail-fast: false
       matrix:
         registry_url:
-          - hsc-registry.cn-shanghai.cr.aliyuncs.com
-          - registry.cn-shanghai.aliyuncs.com
+          - https://hsc-registry.cn-shanghai.cr.aliyuncs.com
+          - https://registry.cn-shanghai.aliyuncs.com
           # https://registry.cn-shanghai.aliyuncs.com/v2/
     steps:
       - name: Checkout repository
@@ -44,4 +44,6 @@ jobs:
       - name: Curl ${{ matrix.registry_url }}
         shell: bash
         run: |
-          "${GITHUB_WORKSPACE}/.github/scripts/get-server-geolocation.sh" ${{ matrix.registry_url }}
+          url= ${{ matrix.registry_url }}
+          "${GITHUB_WORKSPACE}/.github/scripts/get-server-geolocation.sh" $url
+          curl -v "$url"
