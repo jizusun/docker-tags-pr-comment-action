@@ -25,7 +25,7 @@ jobs:
           username: foo
           password: bar
   curl:
-    name: Check Aliyun
+    name: Curl Aliyun
     runs-on: ubuntu-latest
     strategy:
       matrix:
