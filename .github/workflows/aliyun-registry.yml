@@ -44,6 +44,6 @@ jobs:
       - name: Curl ${{ matrix.registry_url }}
         shell: bash
         run: |
-          url= ${{ matrix.registry_url }}
+          url=${{ matrix.registry_url }}
           "${GITHUB_WORKSPACE}/.github/scripts/get-server-geolocation.sh" $url
           curl -v "$url"
