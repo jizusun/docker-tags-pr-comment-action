@@ -63,3 +63,13 @@ jobs:
             image:foo
             image:bar
             image:foobar
+
+      - name: Test Another Local Action 
+        id: test-action-2
+        uses: ./composite
+        if: github.event_name == 'pull_request'
+        with:
+          docker-tags: |
+            image-2:foo
+            image-2:bar
+            image-2:foobar
