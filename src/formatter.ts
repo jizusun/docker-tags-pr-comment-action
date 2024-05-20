@@ -10,3 +10,7 @@ export function formatDockerTags(dockerTags: string): string {
     .map(tag => `- \`${tag}\``)
     .join('\n')
 }
+
+export function getDockerImageName(dockerTags: string): string {
+  return dockerTags.split(':')[0]
+}

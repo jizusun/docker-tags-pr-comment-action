@@ -22,5 +22,4 @@ runs:
           # :rocket: Docker images are ready! 
           ${{ steps.docker-tags-to-markdown.outputs.markdown-string }}
         reactions: eyes, rocket
-        comment_tag: ${{ inputs.docker-tags }}
-
+        comment_tag: ${{ steps.docker-tags-to-markdown.outputs.docker-image-name }}
