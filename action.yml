@@ -10,13 +10,15 @@ branding:
 # Define your inputs here.
 inputs:
   docker-tags:
-    description: "the string of docker tags"
+    description: "the string of docker images tags"
     required: true
 
 # Define your outputs here.
 outputs:
   markdown-string:
     description: "the string of a markdown bullet list "
+  docker-image-name:
+    description: 'the string of the docker image name, without tag'
 
 runs:
   using: node20

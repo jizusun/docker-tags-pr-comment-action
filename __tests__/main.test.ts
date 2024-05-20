@@ -59,6 +59,11 @@ describe('action', () => {
       'markdown-string',
       '- `image:foo`\n- `image:bar`'
     )
+    expect(setOutputMock).toHaveBeenNthCalledWith(
+      2,
+      'docker-image-name',
+      'image'
+    )
     expect(errorMock).not.toHaveBeenCalled()
   })
 
