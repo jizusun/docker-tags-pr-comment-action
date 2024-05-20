@@ -2733,7 +2733,7 @@ exports["default"] = _default;
  * @returns string The markdown bullet list string.
  */
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.formatDockerTags = void 0;
+exports.getDockerImageName = exports.formatDockerTags = void 0;
 function formatDockerTags(dockerTags) {
     return dockerTags
         .split('\n')
@@ -2741,6 +2741,10 @@ function formatDockerTags(dockerTags) {
         .join('\n');
 }
 exports.formatDockerTags = formatDockerTags;
+function getDockerImageName(dockerTags) {
+    return dockerTags.split(':')[0];
+}
+exports.getDockerImageName = getDockerImageName;
 
 
 /***/ }),
@@ -2786,9 +2790,9 @@ function run() {
         const dockerTags = core.getInput('docker-tags');
         // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
         core.debug(`docker-tags: ${dockerTags} `);
-        const markdownString = (0, formatter_1.formatDockerTags)(dockerTags);
         // Set outputs for other workflow steps to use
-        core.setOutput('markdown-string', markdownString);
+        core.setOutput('markdown-string', (0, formatter_1.formatDockerTags)(dockerTags));
+        core.setOutput('docker-image-name', (0, formatter_1.getDockerImageName)(dockerTags));
     }
     catch (error) {
         // Fail the workflow run if an error occurs
