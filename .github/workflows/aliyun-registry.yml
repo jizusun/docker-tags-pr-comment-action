@@ -1,0 +1,49 @@
+name: Check AliCloud
+
+on:
+  pull_request:
+    branches:
+      - main
+
+env:
+  REGISTRY_URL: 'hsc-registry.cn-shanghai.cr.aliyuncs.com'
+
+jobs:
+  docker-login-registry:
+    name: Docker login
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        registry_url:
+          - hsc-registry.cn-shanghai.cr.aliyuncs.com
+          - registry.cn-shanghai.aliyuncs.com
+    steps:
+      - name: Login to ${{ matrix.registry_url}}
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: ${{ matrix.registry_url }}
+          username: foo
+          password: bar
+  curl:
+    name: Curl and geolocation
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        registry_url:
+          - https://hsc-registry.cn-shanghai.cr.aliyuncs.com
+          - https://registry.cn-shanghai.aliyuncs.com
+          # https://registry.cn-shanghai.aliyuncs.com/v2/
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Curl ${{ matrix.registry_url }}
+        shell: bash
+        run: |
+          url=${{ matrix.registry_url }}
+          "${GITHUB_WORKSPACE}/.github/scripts/get-server-geolocation.sh" $url
+          curl -v "$url"
